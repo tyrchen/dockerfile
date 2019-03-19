@@ -14,7 +14,7 @@ shell: ## Run an Elixir shell in the image
 	docker run --rm -it $(IMAGE_NAME):$(VERSION) iex
 
 sh: ## Boot to a shell prompt
-	docker run --rm -it $(IMAGE_NAME):$(VERSION) /bin/sh
+	docker run --rm -it $(IMAGE_NAME):$(VERSION) /bin/bash
 
 build: ## Build the Docker image
 	docker build --force-rm -t $(IMAGE_NAME):$(VERSION) -t $(IMAGE_NAME):$(MIN_VERSION) -t $(IMAGE_NAME):$(MAJ_VERSION) -t $(IMAGE_NAME):latest .
@@ -26,3 +26,4 @@ rebuild: clean build ## Rebuild the Docker image
 
 release: build ## Rebuild and release the Docker image to Docker Hub
 	docker push $(IMAGE_NAME):$(VERSION)
+	docker push $(IMAGE_NAME):latest
