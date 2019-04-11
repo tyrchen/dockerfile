@@ -14,14 +14,17 @@ ENV ELIXIR_VERSION=v1.8.1
 
 WORKDIR /tmp/elixir-build
 
+RUN apt-get update
 RUN apt-get install -y \
 	apt-utils \
 	build-essential \
 	cmake \
 	curl \
 	git \
+	libsqlite3-dev \
 	ncurses-dev \
-	wget
+	wget \
+	zstd
 
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - && \
 	apt-get install -y nodejs

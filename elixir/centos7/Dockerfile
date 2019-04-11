@@ -29,6 +29,7 @@ RUN yum install -q -y \
 	gmp-devel \
 	libffi \
 	libffi-devel \
+	libsqlite3x-devel \
 	libtool \
 	m4 \
 	make \
@@ -39,7 +40,8 @@ RUN yum install -q -y \
 	rpm-build \
 	tar \
 	wget \
-	zlib-devel
+	zlib-devel \
+	zstd
 
 RUN /usr/bin/curl --silent --location https://rpm.nodesource.com/setup_11.x | bash && \
 	yum install nodejs -q -y
