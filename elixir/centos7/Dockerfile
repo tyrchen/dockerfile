@@ -30,6 +30,7 @@ RUN yum install -q -y \
 	libffi \
 	libffi-devel \
 	libsqlite3x-devel \
+	libzstd-devel \
 	libtool \
 	m4 \
 	make \

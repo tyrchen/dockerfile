@@ -22,6 +22,7 @@ RUN apt-get install -y \
 	curl \
 	git \
 	libsqlite3-dev \
+	libzstd-dev \
 	ncurses-dev \
 	wget \
 	zstd
