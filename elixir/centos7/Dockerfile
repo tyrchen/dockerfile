@@ -27,11 +27,14 @@ RUN yum install -q -y \
 	gcc \
 	gcc-c++ \
 	gmp-devel \
+	gmp-static \
 	libffi \
 	libffi-devel \
 	libsqlite3x-devel \
 	libzstd-devel \
 	libtool \
+	lzma \
+	lz4-devel \
 	m4 \
 	make \
 	ncurses-devel \
@@ -43,6 +46,10 @@ RUN yum install -q -y \
 	wget \
 	zlib-devel \
 	zstd
+
+RUN git clone https://github.com/facebook/zstd --depth 1 --branch zstd-0.4.2 && \
+	cd zstd && \
+	make EXTRA_CFLAGS=-fPIC && make install
 
 RUN /usr/bin/curl --silent --location https://rpm.nodesource.com/setup_11.x | bash && \
 	yum install nodejs -q -y

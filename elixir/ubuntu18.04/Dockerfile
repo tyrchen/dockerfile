@@ -16,16 +16,26 @@ WORKDIR /tmp/elixir-build
 
 RUN apt-get update
 RUN apt-get install -y \
+	autoconf \
 	apt-utils \
 	build-essential \
 	cmake \
 	curl \
 	git \
 	libsqlite3-dev \
+	libgmp-dev \
+	liblz4-dev \
+	liblzma-dev \
+	libtool \
 	libzstd-dev \
 	ncurses-dev \
 	wget \
-	zstd
+	zstd \
+	unzip
+
+RUN git clone https://github.com/facebook/zstd --depth 1 --branch zstd-0.4.2 && \
+	cd zstd && \
+	make EXTRA_CFLAGS=-fPIC && make install
 
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - && \
 	apt-get install -y nodejs
@@ -52,7 +62,7 @@ RUN git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_V
 # 	./config -Wl,--enable-new-dtags,-rpath,'$(LIBRPATH)' && make && \
 # 	make install
 
-RUN  apt-get install -y autoconf libtool libgmp-dev unzip && apt-get auto-remove
+RUN apt-get auto-remove
 
 RUN mkdir -p /opt/app
 
