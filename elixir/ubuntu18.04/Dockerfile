@@ -10,7 +10,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales 
 
 ENV LANG en_US.UTF-8
 
-ENV ELIXIR_VERSION=v1.8.1
+ENV ELIXIR_VERSION=v1.9
 
 WORKDIR /tmp/elixir-build
 

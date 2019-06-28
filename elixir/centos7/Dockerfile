@@ -4,7 +4,7 @@ LABEL maintainer="Tyr Chen <tyr.chen@gmail.com>"
 
 ENV LC_ALL=en_US.utf8
 
-ENV ELIXIR_VERSION=v1.8.1
+ENV ELIXIR_VERSION=v1.9
 
 WORKDIR /tmp/elixir-build
 
