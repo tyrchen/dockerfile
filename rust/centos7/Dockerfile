@@ -58,7 +58,19 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/rust-build/
 
 RUN sh /tmp/rust-build/rustup.sh -y
 
-RUN source $HOME/.cargo/env
+RUN cp $HOME/.cargo/bin/* /usr/local/bin
+
+RUN yum install -q -y llvm-devel clang-devel snappy-devel gflags-devel
+
+ADD config $HOME/.cargo/
+
+# RUN git clone https://github.com/rust-rocksdb/rust-rocksdb --depth 1 --branch v0.13.0 && \
+#   cd rust-rocksdb && git submodule update --init --recursive && cargo build && cargo build --release
+
+# RUN git clone https://github.com/serde-rs/serde --depth 1 --branch v1.0.104 && \
+#   cd serde && cargo build && cargo build --release
+
+RUN mkdir -p /opt/app && cd /opt/app && rm -rf /tmp/rust-build
 
 RUN mkdir -p /opt/app
 
