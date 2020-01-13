@@ -4,9 +4,7 @@ LABEL maintainer="Tyr Chen <tyr.chen@gmail.com>"
 
 ENV LC_ALL=en_US.utf8
 
-ENV ELIXIR_VERSION=v1.9.1
-
-WORKDIR /tmp/elixir-build
+WORKDIR /tmp/rust-build
 
 RUN yum -y update && yum clean all
 
@@ -54,23 +52,13 @@ RUN git clone https://github.com/facebook/zstd --depth 1 --branch zstd-0.4.2 && 
 RUN /usr/bin/curl --silent --location https://rpm.nodesource.com/setup_11.x | bash && \
 	yum install nodejs -q -y
 
-RUN yum localinstall -q -y https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm && \
-	yum install esl-erlang -q -y
-
-RUN git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION && \
-	cd elixir && \
-	make && make install && \
-	mix local.hex --force && \
-	mix local.rebar --force && \
-	cd $HOME && \
-	rm -rf /tmp/elixir-build
-
-# RUN curl -O -L https://www.openssl.org/source/openssl-1.1.1.tar.gz && \
-# 	tar xvf openssl-1.1.1.tar.gz && cd openssl-1.1.1 && \
-# 	./config -Wl,--enable-new-dtags,-rpath,'$(LIBRPATH)' && make && \
-# 	make install && cd .. && rm -rf openssl-1.1.1
-
 RUN yum clean all
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/rust-build/rustup.sh && chmod +x /tmp/rust-build
+
+RUN sh /tmp/rust-build/rustup.sh -y
+
+RUN source $HOME/.cargo/env
 
 RUN mkdir -p /opt/app
 
