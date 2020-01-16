@@ -4,7 +4,7 @@ LABEL maintainer="Tyr Chen <tyr.chen@gmail.com>"
 
 ENV LC_ALL=en_US.utf8
 
-ENV ELIXIR_VERSION=v1.9.1
+ENV ELIXIR_VERSION=v1.9.4
 
 WORKDIR /tmp/elixir-build
 
@@ -54,7 +54,8 @@ RUN git clone https://github.com/facebook/zstd --depth 1 --branch zstd-0.4.2 && 
 RUN /usr/bin/curl --silent --location https://rpm.nodesource.com/setup_11.x | bash && \
 	yum install nodejs -q -y
 
-RUN yum localinstall -q -y https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm && \
+
+RUN yum localinstall -q -y https://packages.erlang-solutions.com/erlang/rpm/centos/7/x86_64/esl-erlang_22.2.2-1~centos~7_amd64.rpm && \
 	yum install esl-erlang -q -y
 
 RUN git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION && \
